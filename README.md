@@ -1,348 +1,375 @@
-# 📝 GitHub Assignment: Mastering Git_Basics
+<div align="center">
 
-## 📌 Objective:
-This assignment will help you learn essential Git commands required for real-world team collaboration. Each task covers different Git operations, including cloning, branching, merging, rebasing, stashing, and pull requests.
+# 💬 Chatty
 
-## Note:
-- **Recommended**: Use VS Code as your IDE for a better development experience
-- **Best Practice**: Use clear and descriptive commit messages when committing changes.
-- Try to understand each command and observe the changes after each command.
+### A real-time full-stack chat application
 
-## ✅ Task 1: Cloning a Remote Repo and Pushing Changes
-### 📌 Concepts Covered: git clone, git commit, git push, git pull
+[![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://mongodb.com)
+[![Socket.io](https://img.shields.io/badge/Socket.io-4-010101?style=flat-square&logo=socket.io)](https://socket.io)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-### 🛠 Steps:
-1. Clone this repository to your local machine:
-```sh
-git clone <your-assigned-repo-url>
-cd <repo-name>
+</div>
+
+---
+
+## ✨ Features
+
+- 🔐 **JWT Authentication** — secure signup, login, and logout with HttpOnly cookie sessions
+- 💬 **Real-time Messaging** — instant message delivery using Socket.io WebSockets
+- 📷 **Image Sharing** — send images in chat and update profile pictures (hosted on Cloudinary)
+- 🟢 **Online Presence** — see which users are currently online in real time
+- 🎨 **32 Themes** — full DaisyUI theme switcher (light, dark, synthwave, cyberpunk, and more)
+- 👤 **Profile Management** — update your profile photo with live preview
+- 📱 **Responsive Design** — works on mobile, tablet, and desktop
+- 💀 **Skeleton Loading** — smooth loading placeholders while data fetches
+- 🔔 **Toast Notifications** — user-friendly feedback for all actions
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+| Technology | Purpose |
+|---|---|
+| **Node.js** | JavaScript runtime |
+| **Express.js v5** | Web framework & REST API |
+| **MongoDB + Mongoose** | Database & ODM |
+| **Socket.io** | Real-time WebSocket communication |
+| **JWT (jsonwebtoken)** | Authentication tokens |
+| **bcryptjs** | Password hashing |
+| **Cloudinary** | Cloud image storage |
+| **cookie-parser** | Reading HttpOnly cookies |
+| **cors** | Cross-origin request handling |
+| **dotenv** | Environment variable management |
+
+### Frontend
+| Technology | Purpose |
+|---|---|
+| **React 19** | UI library |
+| **Vite 6** | Build tool & dev server |
+| **React Router v7** | Client-side routing |
+| **Zustand** | Global state management |
+| **Axios** | HTTP client |
+| **Socket.io-client** | Real-time event handling |
+| **TailwindCSS v4** | Utility-first CSS framework |
+| **DaisyUI v5** | UI component library (themes) |
+| **lucide-react** | Icon set |
+| **react-hot-toast** | Toast notification system |
+
+---
+
+## 📁 Project Structure
+
+```
+chat/
+├── .gitignore                      # Root gitignore
+├── README.md                       # This file
+│
+├── backend/
+│   ├── .env.example                # Environment variable template
+│   ├── .gitignore
+│   ├── package.json
+│   └── src/
+│       ├── index.js                # Server entry point
+│       ├── controllers/
+│       │   ├── auth.controller.js  # Signup, login, logout, update profile
+│       │   └── message.controller.js # Get users, get messages, send message
+│       ├── db/
+│       │   ├── db1.js              # MongoDB connection
+│       │   ├── socket.js           # Socket.io server setup
+│       │   ├── cloudinary.js       # Cloudinary configuration
+│       │   └── util.js             # JWT token generator
+│       ├── middlewares/
+│       │   └── auth.middleware.js  # JWT route protection
+│       ├── models/
+│       │   ├── user.model.js       # User schema
+│       │   └── message.model.js    # Message schema
+│       ├── routes/
+│       │   ├── auth.route.js       # /api/auth/* routes
+│       │   └── message.route.js    # /api/messages/* routes
+│       ├── seeds/
+│       │   └── user.seed.js        # Database seeder (15 test users)
+│       └── utils/
+│           ├── ApiError.js         # Custom error class
+│           ├── ApiResponse.js      # Standard response wrapper
+│           ├── asyncHandler.js     # Async route handler wrapper
+│           └── cloudinary.js       # File-based upload helper
+│
+└── frontend/
+    ├── index.html
+    ├── vite.config.js
+    ├── package.json
+    └── src/
+        ├── main.jsx                # React entry point
+        ├── App.jsx                 # Root component + routing
+        ├── index.css               # Tailwind + DaisyUI imports
+        ├── lib/
+        │   ├── axios.js            # Configured Axios instance
+        │   └── utils.js            # formatMessageTime helper
+        ├── store/
+        │   ├── useAuthStore.js     # Auth state + socket management
+        │   ├── useChatStore.js     # Chat state + messaging
+        │   └── useThemeStore.js    # Theme persistence
+        ├── pages/
+        │   ├── HomePage.jsx        # Main chat layout
+        │   ├── LoginPage.jsx       # Login form
+        │   ├── SignupPage.jsx      # Registration form
+        │   ├── ProfilePage.jsx     # Profile + avatar upload
+        │   └── SettingsPage.jsx    # Theme switcher
+        └── components/
+            ├── Navbar.jsx
+            ├── Sidebar.jsx         # Contact list + online status
+            ├── ChatContainer.jsx   # Message thread
+            ├── ChatHeader.jsx      # Chat area header
+            ├── MessageInput.jsx    # Text + image input
+            ├── NoChatSelected.jsx  # Welcome placeholder
+            ├── AuthimagePattern.jsx # Auth page decoration
+            └── skeletons/
+                ├── MessageSkeleton.jsx
+                └── SidebarSkeleton.jsx
 ```
 
-2. Create a new file task1.txt and write something in it.
+---
 
-3. Add and commit your changes:
-```sh
-git add task1.txt
-git commit -m "Added task1.txt"
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+- **Node.js** v18 or higher → [nodejs.org](https://nodejs.org)
+- **npm** v9 or higher (comes with Node.js)
+- A **MongoDB Atlas** account → [cloud.mongodb.com](https://cloud.mongodb.com) (free tier works)
+- A **Cloudinary** account → [cloudinary.com](https://cloudinary.com) (free tier works)
+
+---
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Vinay7115/chat_application.git
+cd chat_application
 ```
 
-4. Push your changes back to GitHub:
-```sh
-git push origin main
+---
+
+### 2. Backend Setup
+
+```bash
+cd backend
+npm install
 ```
 
-### 💡 When to use git pull?
-- When another team member made changes in the repository.
-- To keep your local repository updated before making new changes.
+Create your environment file:
 
-### 📝 Simulating a Git Pull (Direct GitHub Edit)
-To practice git pull, we will simulate a remote change:
+```bash
+# Windows
+copy .env.example .env
 
-1. Open your repository on GitHub.
-2. Click on task1.txt → Click Edit (pencil icon).
-3. Add a line at the bottom (e.g., "This edit is made on GitHub").
-4. Click Commit changes.
-5. Now, pull the latest changes from GitHub to your local machine:
-```sh
-git pull origin main
+# Mac/Linux
+cp .env.example .env
 ```
 
-## ✅ Task 2: Branching and Merging
-### 📌 Concepts Covered: git branch, git checkout, git merge
-### 💡 When to use git merge?
-- When combining changes from multiple branches into main.
-- When finishing work on a feature branch and integrating it into the main codebase.
+Open `backend/.env` and fill in your values:
 
-### 🛠 Steps:
-1. Create a new branch called feature-branch:
-```sh
-git branch feature-branch
+```env
+PORT=5001
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority
+JWT_SECRET=your_long_random_secret_here
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+NODE_ENV=development
 ```
 
-2. Switch to the new branch:
-```sh
-git checkout feature-branch
+#### Getting your credentials:
+
+**MongoDB URI:**
+1. Go to [cloud.mongodb.com](https://cloud.mongodb.com)
+2. Create a free cluster → Connect → Drivers
+3. Copy the connection string and replace `<password>` with your DB user's password
+
+**Cloudinary:**
+1. Go to [console.cloudinary.com](https://console.cloudinary.com)
+2. Your dashboard shows `Cloud Name`, `API Key`, and `API Secret`
+
+---
+
+### 3. Frontend Setup
+
+```bash
+cd ../frontend
+npm install
 ```
 
-3. Create task2.txt, add some text, and commit the changes:
-```sh
-git add task2.txt
-git commit -m "Updated task2.txt in feature-branch"
+---
+
+### 4. Run the Application
+
+Open **two terminal windows**:
+
+**Terminal 1 — Backend:**
+```bash
+cd backend
+npm run dev
+# ✅ Server running at http://localhost:5001
 ```
 
-4. Switch back to main branch:
-```sh
-git checkout main
+**Terminal 2 — Frontend:**
+```bash
+cd frontend
+npm run dev
+# ✅ App running at http://localhost:5173
 ```
 
-5. Merge the feature-branch into main:
-```sh
-git merge feature-branch
+Open your browser at **[http://localhost:5173](http://localhost:5173)**
+
+---
+
+### 5. (Optional) Seed the Database
+
+To populate the database with 15 test users for development:
+
+```bash
+cd backend
+npm run seed
 ```
 
-6. Push the merged changes to GitHub:
-```sh
-git push origin main
+This creates users with password `123456`. You can log in as any of them:
+
+| Name | Email |
+|---|---|
+| Emma Thompson | emma.thompson@example.com |
+| Olivia Miller | olivia.miller@example.com |
+| Sophia Davis | sophia.davis@example.com |
+| James Anderson | james.anderson@example.com |
+| William Clark | william.clark@example.com |
+| … and 10 more | password: `123456` |
+
+---
+
+## 🔌 API Reference
+
+### Auth Endpoints
+
+| Method | Endpoint | Auth Required | Description |
+|---|---|---|---|
+| `POST` | `/api/auth/signup` | ❌ | Create a new account |
+| `POST` | `/api/auth/login` | ❌ | Login with email + password |
+| `POST` | `/api/auth/logout` | ❌ | Clear session cookie |
+| `PUT` | `/api/auth/update-profile` | ✅ | Update profile picture |
+| `GET` | `/api/auth/check` | ✅ | Verify current session |
+
+### Message Endpoints
+
+| Method | Endpoint | Auth Required | Description |
+|---|---|---|---|
+| `GET` | `/api/messages/users` | ✅ | Get all users (for sidebar) |
+| `GET` | `/api/messages/:id` | ✅ | Get chat history with a user |
+| `POST` | `/api/messages/send/:id` | ✅ | Send a message to a user |
+
+---
+
+## ⚡ Socket.io Events
+
+| Event | Direction | Payload | Description |
+|---|---|---|---|
+| `connection` | Client → Server | `{ userId }` in query | User connects |
+| `disconnect` | Client → Server | — | User disconnects |
+| `getOnlineUsers` | Server → All Clients | `string[]` (userIds) | Updated online users list |
+| `newMessage` | Server → Receiver | `Message` object | Real-time message delivery |
+
+---
+
+## 🗄️ Data Models
+
+### User
+```json
+{
+  "_id": "ObjectId",
+  "email": "user@example.com",
+  "fullName": "John Doe",
+  "password": "$2b$10$...",
+  "profilePic": "https://res.cloudinary.com/...",
+  "createdAt": "ISO timestamp",
+  "updatedAt": "ISO timestamp"
+}
 ```
 
-## ✅ Task 3: Simulating Merge Conflicts
-### 📌 **Concepts Covered:** Merge conflicts & resolution
-
-### 💡 When Do We Face Merge Conflicts?
-* When **two developers modify the same line in a file** on different branches.
-* When **one branch deletes a file** while another branch modifies it.
-* When merging a **long-lived branch with many updates** into `main`.
-
-### 🛠 **Steps:**
-1️. Create a new branch:
-```sh
-git checkout -b conflict-branch
+### Message
+```json
+{
+  "_id": "ObjectId",
+  "senderId": "ObjectId",
+  "receiverId": "ObjectId",
+  "text": "Hello!",
+  "image": "https://res.cloudinary.com/... (optional)",
+  "createdAt": "ISO timestamp",
+  "updatedAt": "ISO timestamp"
+}
 ```
 
-2️. Create `conflict.txt` in `conflict-branch` and commit:
-```sh
-echo "Change from conflict-branch" >> conflict.txt
-git add conflict.txt
-git commit -m "Change from conflict-branch"
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Commit your changes: `git commit -m "feat: add your feature"`
+4. Push to your branch: `git push origin feature/your-feature-name`
+5. Open a Pull Request
+
+### Commit Message Convention
+- `feat:` — new feature
+- `fix:` — bug fix
+- `docs:` — documentation changes
+- `style:` — formatting, no logic change
+- `refactor:` — code restructure without feature change
+- `chore:` — build, tooling, dependency updates
+
+---
+
+## ⚠️ Environment Variables
+
+> **NEVER commit your `.env` file to Git.** It contains secret credentials that would allow anyone to access your database and cloud accounts.
+
+The `.env.example` file documents all required variables with placeholder values. Always use that as a template.
+
+To generate a secure JWT secret:
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 ```
 
-3️. Switch back to `main` and modify the same file at the same line:
-```sh
-git checkout main
-echo "Change from main branch" >> conflict.txt
-git add conflict.txt
-git commit -m "Change from main"
-```
+---
 
-4️. Merge `conflict-branch` into `main`:
-```sh
-git merge conflict-branch
-```
+## 📦 Scripts Reference
 
-Since both branches modified the same line, Git **cannot** automatically merge them, resulting in a **merge conflict**.
-( Resolving merge Conflicts can be easily done in VS code)
+### Backend (`cd backend`)
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server with hot-reload (nodemon) |
+| `npm run start` | Start production server |
+| `npm run seed` | Seed database with 15 test users |
 
-### 📝 How the File Looks Before & During the Merge Conflict
+### Frontend (`cd frontend`)
+| Command | Description |
+|---|---|
+| `npm run dev` | Start Vite development server |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint |
 
-**Before Merge Conflict**
+---
 
-`conflict.txt` in `main` branch:
-```
-Change from main branch
-```
+## 📄 License
 
-`conflict.txt` in `conflict-branch`:
-```
-Change from conflict-branch
-```
+This project is open source and available under the [MIT License](LICENSE).
 
-**During Merge Conflict (File with Git Conflict Markers)**
+---
 
-After attempting `git merge conflict-branch`, `conflict.txt` will contain **conflict markers**:
-```
-<<<<<<< HEAD
-Change from main branch
-=======
-Change from conflict-branch
->>>>>>> conflict-branch
-```
+<div align="center">
 
-These markers indicate:
-* `HEAD` section → Changes from `main`
-* `=======` separator → The conflicting change
-* **Bottom section** → Changes from `conflict-branch`
+Built with ❤️ using the MERN Stack + Socket.io
 
-### 📝 Resolving Merge Conflicts (follow any one of these cases for practice)
-
-**Case 1: Keeping `main` Branch Changes**
-
-If you want to **keep the `main` branch changes** and discard `conflict-branch`:
-```
-Change from main branch
-```
-
-Then, **stage and commit the resolved file:**
-```sh
-git add conflict.txt
-git commit -m "Resolved merge conflict, kept main version"
-git push origin main
-```
-
-**Case 2: Keeping `conflict-branch` Changes**
-
-If you want to **keep the `conflict-branch` changes** and discard `main`:
-```
-Change from conflict-branch
-```
-
-Then, **stage and commit the resolved file:**
-```sh
-git add conflict.txt
-git commit -m "Resolved merge conflict, kept conflict-branch version"
-git push origin main
-```
-
-**Case 3: Keeping Both Changes (Manual Edit)**
-
-If you want to **keep both** changes, manually edit `conflict.txt` like this:
-```
-Change from main branch
-Change from conflict-branch
-```
-
-Then, **stage and commit the resolved file:**
-```sh
-git add conflict.txt
-git commit -m "Merged both changes"
-git push origin main
-```
-
-## ✅ Task 4: Stashing Work
-### 📌 Concepts Covered: git stash, git stash pop
-
-### 💡 When to use git stash?
-- When working on a feature but need to temporarily switch branches.
-
-### 🛠 Steps:
-1. Create stash.txt, add some text and commit it.
-```sh
-echo "text in stash file" >> stash.txt
-git add stash.txt
-git commit -m "Created stash file"
-```
-2. Modify stash.txt by adding some more text, but do not commit it.
-3. Run:
-```sh
-git stash
-```
-This removes the modified text and adds the changes to a stack, now we can switch to any other branch to do other work
-
-4. to view the stash list:
-```sh
-git stash list
-```
-
-5. After the work is done we can again, restore the stashed changes:
-```sh
-git stash pop
-```
-
-6. Now commit the restored changes:
-```sh
-git add stash.txt
-git commit -m "Restored stashed changes"
-git push origin main
-```
-  
-## ✅ Task 5: Undoing Changes
-### 📌 **Concepts Covered:** `git reset`, `git revert`
-
-### 🛠 **Steps:**
-
-**Part 1: Resetting a Commit (`git reset`)**
-
-1️. Create `undo.txt`, add some text and commit:
-```sh
-git add undo.txt
-git commit -m "Mistake commit"
-```
-
-2️. Undo the last commit (keep changes staged):
-```sh
-git reset --soft HEAD~1
-```
-This removes the commit and gets back the changes to staged state
-
-**Part 2: Reverting a Commit (`git revert`)**
-1. Again commit the changes of undo.txt:
-```sh
-git commit -m "Revert commit"
-```
-
-3. Revert the change (create a new undo commit):
-```sh
-git revert HEAD
-```
-4. This opens a vim editor in terimal type `:wq` and press enter.
-This completely reverts the previous commit. (remove the modification not only from commit but also from staging and hence completely)
-
-### 💡 When to Use `git reset` vs. `git revert`?
-
-| Scenario | Command |
-|----------|---------|
-| Undo a commit before pushing (keep changes) | `git reset --soft HEAD~1` |
-| Undo a commit after pushing (safe for teamwork) | `git revert HEAD` |
-
-🔹 **Use `git reset`** before pushing to **erase a commit from history**.  
-🔹 **Use `git revert`** after pushing to **safely undo a commit without rewriting history**. 🚀
-
-## ✅ Task 6: Rebasing
-### 📌 Concepts Covered: git rebase
-
-### 💡 When to use `git rebase`?
-* To **clean up commit history**.
-* To **apply changes on top of the latest branch**.
-
-### 🛠 Steps:
-1. Create a new branch:
-```sh
-git checkout -b rebase-branch
-```
-
-2. Create rebase.txt, add some text, commit:
-```sh
-git add rebase.txt
-git commit -m "Commit on rebase-branch"
-```
-
-3. Switch back to main, modify the same file, and commit:
-```sh
-git checkout main
-echo "New change in main" >> rebase.txt
-git add rebase.txt
-git commit -m "Commit on main"
-```
-
-4. Rebase rebase-branch onto main:
-```sh
-git checkout rebase-branch
-git rebase main
-```
-
-5. If a conflict occurs, resolve it (in VS code), then continue rebase:
-```sh
-git add .
-git rebase --continue
-```
-
-## ✅ Task 7: Simulating a Pull Request
-### 📌 Concepts Covered: Forking, Pull Requests (PRs)
-
-### 🛠 Steps:
-1. Create a new branch:
-```sh
-git checkout -b pr-branch
-```
-
-2. Create pr.txt, add some text, and commit:
-```sh
-git add pr.txt
-git commit -m "Added PR example"
-```
-
-3. Push the branch:
-```sh
-git push origin pr-branch
-```
-
-4. Go to your GitHub repository → Pull Requests → New Pull Request.
-5. Compare pr-branch with main, then click Create Pull Request.
-6. Since you're practicing, you will approve & merge it yourself:
-   - Click Merge Pull Request → Confirm Merge.
-7. Delete the pr-branch by clicking on delete branch button OR you can use the commands:
-```sh
-git checkout main
-git pull origin main
-git branch -d pr-branch
-git push origin --delete pr-branch
-```
+</div>
